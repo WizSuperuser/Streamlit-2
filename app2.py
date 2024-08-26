@@ -8,8 +8,7 @@ from langchain.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
 
 # Set up OpenAI API key
-openai.api_key = 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
-
+openai.api_key = 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
 
 # Initialize LangChain with the provided parameters
 llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
