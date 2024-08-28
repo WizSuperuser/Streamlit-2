@@ -1,5 +1,6 @@
-streamlit
+streamlit==1.24.0
 pandas
-openai
-langchain
+openai==0.27.8
+langchain==0.0.120
+pydantic==1.10.7
 langchain-community
