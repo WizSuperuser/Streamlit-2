@@ -14,6 +14,18 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Initialize LangChain with the provided parameters
 llm = OpenAI(temperature=0, model = "gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
 
+# Check if the API key and other parameters are correctly set
+st.write(f"Using OpenAI API Key: {openai.api_key}")
+st.write(f"Model: gpt-3.5-turbo-instruct")
+st.write(f"Temperature: 0")
+
+# Initialize LangChain with the provided parameters
+llm = OpenAI(
+    temperature=0, 
+    model="gpt-3.5-turbo-instruct",  # Use `model` instead of `model_name`
+    openai_api_key=openai.api_key
+)
+
 preamble = """
 Act like a college teacher who specializes in guiding students through new concepts and problem-solving techniques. Your primary focus is on helping students learn and improve their understanding of academic subjects through a structured hint system. For each question, provide hints first, and if the student asks for more help, gradually offer more detailed guidance, culminating in a comprehensive solution if necessary. Your objective is to ensure that students have the opportunity to grasp the concept and explore different approaches before revealing the complete answer. Emphasize the importance of focusing on studies and avoid distractions.
 
