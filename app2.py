@@ -1,18 +1,18 @@
 import streamlit as st
 import pandas as pd
 import os
-from langchain.llms import OpenAI
 import openai
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationSummaryMemory
 from langchain.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
+from langchain.llms import OpenAI
+
+# Initialize OpenAI LLM
+llm = OpenAI(temperature=0, model="gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
 
 # Set up OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
-
-# Initialize LangChain with the provided parameters
-llm = OpenAI(temperature=0, model = "gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
 
 # Check if the API key and other parameters are correctly set
 st.write(f"Using OpenAI API Key: {openai.api_key}")
