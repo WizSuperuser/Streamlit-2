@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 from langchain.llms import OpenAI
 import openai
 from langchain.chains import ConversationChain
