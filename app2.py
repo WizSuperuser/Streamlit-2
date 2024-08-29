@@ -1,22 +1,20 @@
 import streamlit as st
 import pandas as pd
+from langchain.llms import OpenAI
+import openai
+import os
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationSummaryMemory
 from langchain.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
 
-from langchain.llms import OpenAI
-import openai
-import os
+# Set up OpenAI API key
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    st.error("OpenAI API Key is missing. Set the environment variable correctly.")
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-
-# Correct initialization
-llm = OpenAI(
-    temperature=0,
-    model_name="gpt-3.5-turbo-instruct",  # Ensure that 'model_name' is used instead of 'model'
-    openai_api_key=openai.api_key
-)
+# Initialize LangChain with the provided parameters
+llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
 
 preamble = """
 Act like a college teacher who specializes in guiding students through new concepts and problem-solving techniques. Your primary focus is on helping students learn and improve their understanding of academic subjects through a structured hint system. For each question, provide hints first, and if the student asks for more help, gradually offer more detailed guidance, culminating in a comprehensive solution if necessary. Your objective is to ensure that students have the opportunity to grasp the concept and explore different approaches before revealing the complete answer. Emphasize the importance of focusing on studies and avoid distractions.
