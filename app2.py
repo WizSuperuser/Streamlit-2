@@ -1,20 +1,21 @@
 import streamlit as st
 import pandas as pd
 from langchain.llms import OpenAI
-import openai
-import os
+#import openai
+from langchain_community.callbacks import get_openai_callback #throwing error
 from langchain.chains import ConversationChain
 from langchain.chains.conversation.memory import ConversationSummaryMemory
-from langchain.callbacks import get_openai_callback
+#from langchain.callbacks import get_openai_callback
+from langchain_community.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
+#from google.colab import userdata #Uncomment this whenr running in colab
+#openaiapikey = userdata.get('openaiapikey') #Uncomment this whenr running in colab
 
 # Set up OpenAI API key
-openai_api_key = os.getenv("OPENAI_API_KEY")
-if not openai_api_key:
-    st.error("OpenAI API Key is missing. Set the environment variable correctly.")
+#openai.api_key = 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
 
 # Initialize LangChain with the provided parameters
-llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=openai.api_key)
+llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=openaiapikey)
 
 preamble = """
 Act like a college teacher who specializes in guiding students through new concepts and problem-solving techniques. Your primary focus is on helping students learn and improve their understanding of academic subjects through a structured hint system. For each question, provide hints first, and if the student asks for more help, gradually offer more detailed guidance, culminating in a comprehensive solution if necessary. Your objective is to ensure that students have the opportunity to grasp the concept and explore different approaches before revealing the complete answer. Emphasize the importance of focusing on studies and avoid distractions.
@@ -144,7 +145,7 @@ if navigation == "Ask Anything":
 # Plan Your Learning Section
 elif navigation == "Plan Your Learning":
     st.write("## Plan Your Learning")
-    
+
     # File upload widget
     uploaded_file = st.file_uploader("Upload your course details CSV", type=["csv"])
 
@@ -158,7 +159,7 @@ elif navigation == "Plan Your Learning":
     available_time_minutes_per_day = available_time_hours * 60
 
     # Load and prepare course data
-    df = pd.read_csv('C:/Users/hindv/Downloads/Course.csv')
+    df = pd.read_csv("https://raw.githubusercontent.com/WizSuperuser/Streamlit-2/refs/heads/main/Course.csv")
 
     def append_time_column(df, available_time_minutes, available_time_days):
         df['Available time(mins)'] = available_time_minutes
@@ -242,8 +243,3 @@ elif navigation == "Take Smart Notes":
             st.markdown(f"<div class='chat-bubble user-chat'>{msg}</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='chat-bubble ai-chat'>{msg}</div>", unsafe_allow_html=True)
-
-# Get Feedback Section
-elif navigation == "Get Feedback":
-    st.write("## Get Feedback")
-    # Implement your feedback logic here
