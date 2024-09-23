@@ -9,7 +9,7 @@ from langchain.chains.conversation.memory import ConversationSummaryMemory
 from langchain_community.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
 #from google.colab import userdata #Uncomment this whenr running in colab
-#openaiapikey = userdata.get('openaiapikey') #Uncomment this whenr running in colab
+#openaiapikey = userdata.get(openaiapikey) #Uncomment this when running in colab #Removing quotes for openaiapikey
 
 # Set up OpenAI API key
 #openai.api_key = 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
