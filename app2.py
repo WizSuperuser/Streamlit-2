@@ -8,14 +8,16 @@ from langchain.chains.conversation.memory import ConversationSummaryMemory
 #from langchain.callbacks import get_openai_callback
 from langchain_community.callbacks import get_openai_callback
 from langchain.schema import SystemMessage
+import os
+os.environ['openaiapikey'] = st.secrets['openaiapikey']
 #from google.colab import userdata #Uncomment this whenr running in colab
-#openaiapikey = userdata.get(openaiapikey) #Uncomment this when running in colab #Removing quotes for openaiapikey
+#openaiapikey = userdata.get('openaiapikey') #Uncomment this when running in colab 
 
 # Set up OpenAI API key
 #openai.api_key = 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
 
 # Initialize LangChain with the provided parameters
-llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=openaiapikey)
+llm = OpenAI(temperature=0, model_name="gpt-3.5-turbo-instruct", openai_api_key=os.getenv('openaiapikey'))
 
 preamble = """
 Act like a college teacher who specializes in guiding students through new concepts and problem-solving techniques. Your primary focus is on helping students learn and improve their understanding of academic subjects through a structured hint system. For each question, provide hints first, and if the student asks for more help, gradually offer more detailed guidance, culminating in a comprehensive solution if necessary. Your objective is to ensure that students have the opportunity to grasp the concept and explore different approaches before revealing the complete answer. Emphasize the importance of focusing on studies and avoid distractions.
